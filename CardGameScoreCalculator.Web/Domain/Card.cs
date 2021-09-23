@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CardGameScoreCalculator.Web.Domain
+﻿namespace CardGameScoreCalculator.Web.Domain
 {
     public  class Card
     {

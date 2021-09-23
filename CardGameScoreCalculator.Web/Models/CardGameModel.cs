@@ -1,20 +1,19 @@
 ﻿using CardGameScoreCalculator.Web.Validators;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CardGameScoreCalculator.Web.Models
 {
     public class CardGameModel
     {
         [Required(ErrorMessage = "Cards Missing")]
-        [MinLength(length:2, ErrorMessage = "Invalid Cards")]
+        [MinLength(length:2, ErrorMessage = "Card not recognised")]
         [DisplayName("Enter your cards")]
         [CardsHandValidation]
         public string Hand { get; set; }
+
+        // for tooltip
         public static string Description =>
             $"1.The list of cards must be given as a comma separated list.{Environment.NewLine}" +
             $"2.Each card must use a two-character representation as follows:{Environment.NewLine}" +

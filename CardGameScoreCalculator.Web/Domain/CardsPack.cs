@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CardGameScoreCalculator.Web.Domain
 {
+    /// <summary>
+    /// This class represents pack of all cards. 52 cards and their score + 1 joker, though 2 jokers are allowed but we don't need to add duplicate
+    /// </summary>
     public class CardsPack
     {
         public static IList<Card> Cards { get; } = new List<Card>();
@@ -23,7 +23,6 @@ namespace CardGameScoreCalculator.Web.Domain
             BuildCardsOfType(CardType.Spade);
 
             Cards.Add(new Card { Identifier = JokerCard, Description = "Joker" });
-           // Cards.Add(new Card { Identifier = "JR", Description = "Joker" });
         }
 
         private static void BuildCardsOfType(CardType cardType)

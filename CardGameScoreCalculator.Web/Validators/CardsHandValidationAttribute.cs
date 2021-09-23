@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CardGameScoreCalculator.Web.Validators
 {
@@ -72,7 +71,7 @@ namespace CardGameScoreCalculator.Web.Validators
             return ValidationResult.Success;
         }
 
-        public bool IsValidCard(string card)
+        private bool IsValidCard(string card)
         {
             return CardsPack.Cards.ToList().Exists(c => c.Identifier.ToLower().Equals(card.Trim().ToLower()));
         }
