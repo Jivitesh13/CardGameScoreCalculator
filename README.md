@@ -34,7 +34,11 @@ CardGameScoreCalculator.Web.Test - Unit tests for Model, Validator and controlle
 **How to run the application?**
 
 Clone or download the code locally.
+
 Open solution file in Visual Studio 2019.
+
 Build the project.
+
 Run the web project in Visual Studio. 
+
 Home page will be appeared in browser.
