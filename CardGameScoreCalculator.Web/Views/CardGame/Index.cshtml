@@ -11,28 +11,31 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script href="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    
+
 </head>
 
-<body class="modal-body">
-    <div class="align-content-center">
-        <form asp-action="Score" method="post" role="form">
+<body>
+    <div class="card w-50">
+        <div class="card-header">
+            Check your Score
+        </div>
+        <div class="card-body">
+            <form asp-action="Score" method="post" role="form">
 
-            <div class="form-group">
-                <label asp-for="Hand" class="control-label col-md-2"></label>
-                <div class="col-md-3">
-                    <input asp-for="Hand" class="form-control" data-toggle="tooltip" data-placement="right" title="@Model.Description" />
+                <div class="form-group">
+                    <label asp-for="Hand" class="control-label"></label>
+                    <div>
+                        <input asp-for="Hand" class="form-control" data-toggle="tooltip" data-placement="right" title="@CardGameModel.Description" />
+                    </div>
                 </div>
-            </div>
-
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div>
-                <div class="col-md-offset-2 col-md-5">
-
-                    <input type="submit" class="btn btn-primary btn-lg" value="Check your score" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div>
+                    <div>
+                        <input type="submit" class="btn btn-primary btn-lg" value="Check your score" />
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 </html>

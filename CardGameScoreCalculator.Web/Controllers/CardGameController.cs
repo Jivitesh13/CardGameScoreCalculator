@@ -1,4 +1,4 @@
-﻿//using CardGameScoreCalculator.Web.Models;
+﻿using CardGameScoreCalculator.Web.Domain;
 using CardGameScoreCalculator.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -23,19 +23,35 @@ namespace CardGameScoreCalculator.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new CardGameModel());
+            return View();
         }
 
         [HttpPost]
         public IActionResult Score(CardGameModel cardGameModel)
         {
+            var pack = CardsPack.Cards;
+
             if (!ModelState.IsValid)
             {
                 return View(nameof(this.Index));
             }
 
-            ModelState.AddModelError("1", "Test error");
-            return View();
+            var cards = cardGameModel.Hand.Split(",").Select(c => c.Trim().ToLower()).ToList();
+
+            var score = from cardInHand in cards
+            join cardInPack in CardsPack.Cards on cardInHand equals cardInPack.Identifier.ToLower()
+            select new { Card = cardInPack.Description, score = cardInPack.Score };
+
+            var numberOfJokers = cards.Where(c => c.Equals(CardsPack.JokerCard.ToLower())).Count();
+            var totalScore = score.Sum(s => s.score) * (numberOfJokers > 0 ? numberOfJokers * 2 : 1) ;
+
+            var scoreModel = new ScoreResultModel
+            {
+                Score = totalScore
+            };
+
+            score.ToList().ForEach(c => scoreModel.Cards.Add(c.Card));
+            return View(scoreModel);
         }       
     }
 }
