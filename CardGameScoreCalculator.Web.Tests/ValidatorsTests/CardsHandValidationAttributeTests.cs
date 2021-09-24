@@ -16,6 +16,8 @@ namespace CardGameScoreCalculator.Web.Tests.ValidatorsTests
         }
 
         [DataTestMethod]
+        [DataRow(null, "Please enter your cards")]
+        [DataRow("X", "Invalid input string")]
         [DataRow("1S", "Card not recognised")]
         [DataRow("2B", "Card not recognised")]
         [DataRow("2S,1S", "Card not recognised")]
@@ -23,10 +25,10 @@ namespace CardGameScoreCalculator.Web.Tests.ValidatorsTests
         [DataRow("4D,5D,4D", "Cards cannot be duplicated")]
         [DataRow("JR,JR,JR", "A hand cannot contain more than two Jokers")]
         [DataRow("2S|3D", "Invalid input string")]
-        public void GivenInvalidCardsHandThenReturnValidationError(string hand, string expectedMessage = null)
+        public void GivenInvalidCardsHandThenReturnValidationError(string hand, string expectedMessage)
         {
             //act
-            var validationError = Target.GetValidationResult(hand, new ValidationContext(hand));
+            var validationError = Target.GetValidationResult(hand, new ValidationContext(this));
 
             //assert
             Assert.AreEqual(expectedMessage, validationError.ErrorMessage);

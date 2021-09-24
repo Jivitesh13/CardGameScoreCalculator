@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace CardGameScoreCalculator.Web.Validators
 {
+    /// <summary>
+    /// Custome validator for cards
+    /// </summary>
     public class CardsHandValidationAttribute : ValidationAttribute
     {
         // validation rules
@@ -25,7 +28,12 @@ namespace CardGameScoreCalculator.Web.Validators
                                          .Count() > 2;
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var hand = ((string)value).Trim();
+            var hand = ((string)value)?.Trim();
+
+            if (hand is null)
+            {
+                return new ValidationResult("Please enter your cards");
+            }
 
             if (isLengthEqualTo2(hand))
             {

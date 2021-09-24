@@ -7,10 +7,8 @@ namespace CardGameScoreCalculator.Web.Models
 {
     public class CardGameModel
     {
-        [Required(ErrorMessage = "Cards Missing")]
-        [MinLength(length:2, ErrorMessage = "Card not recognised")]
-        [DisplayName("Enter your cards")]
         [CardsHandValidation]
+        [DisplayName("Enter your cards")]
         public string Hand { get; set; }
 
         // for tooltip

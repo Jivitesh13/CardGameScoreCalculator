@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CardGameScoreCalculator.Web.Models.Builders
 {
+    /// <summary>
+    /// Builder class to parse the cards and calculate the score
+    /// </summary>
     public class ScoreResultBuilder : IScoreResultBuilder
     {
         private IList<string> _cards;
@@ -26,6 +29,7 @@ namespace CardGameScoreCalculator.Web.Models.Builders
 
         public ScoreResultModel Build()
         {
+            // Joins enterd list of cards with full pack of cards to find out score of each card
             var cardsDetail = from cardInHand in _cards
                         join cardInPack in CardsPack.Cards on cardInHand equals cardInPack.Identifier.ToLower()
                         select new { Card = cardInPack.Description, score = cardInPack.Score };
