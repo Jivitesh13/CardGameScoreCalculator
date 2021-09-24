@@ -62,8 +62,11 @@ namespace CardGameScoreCalculator.Web.Tests.ControllersTests
             var result = Target.Score(new Models.CardGameModel { Hand = "2C" }) as ViewResult;
 
             //assert
-            Assert.AreEqual("Score", result.ViewName);
             Assert.IsNotNull(result.Model);
+
+            _scoreResultBuilder.Verify(a => a.ForHand(cardGameModel.Hand), Times.Once);
+            _scoreResultBuilder.Verify(a => a.Parse(), Times.Once);
+            _scoreResultBuilder.Verify(a => a.Build(), Times.Once);
         }
     }
 }
